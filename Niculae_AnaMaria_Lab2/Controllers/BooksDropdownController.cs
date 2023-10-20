@@ -58,14 +58,15 @@ namespace Niculae_AnaMaria_Lab2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Title,Price,FullName")] Book book)
+        public async Task<IActionResult> Create([Bind("ID,Title,Price,AuthorID")] Book book)
         {
-            if (ModelState.IsValid)
+            try
             {
                 _context.Add(book);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            catch { }
             ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "FullName", book.AuthorID);
             return View(book);
         }
@@ -92,33 +93,32 @@ namespace Niculae_AnaMaria_Lab2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Price,FullName")] Book book)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Title,Price,AuthorID")] Book book)
         {
             if (id != book.ID)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            try { 
                 try
-                {
-                    _context.Update(book);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BookExists(book.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+            {
+                _context.Update(book);
+                await _context.SaveChangesAsync();
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BookExists(book.ID))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+            return RedirectToAction(nameof(Index));
+            } catch { }
             ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "FullName", book.AuthorID);
             return View(book);
         }
