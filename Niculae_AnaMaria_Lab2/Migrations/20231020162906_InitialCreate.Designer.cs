@@ -12,8 +12,8 @@ using Niculae_AnaMaria_Lab2.Data;
 namespace Niculae_AnaMaria_Lab2.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20231019180534_Homework_secondTry")]
-    partial class Homework_secondTry
+    [Migration("20231020162906_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,7 +43,7 @@ namespace Niculae_AnaMaria_Lab2.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Author", (string)null);
                 });
 
             modelBuilder.Entity("Niculae_AnaMaria_Lab2.Models.Book", b =>
