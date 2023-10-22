@@ -68,7 +68,8 @@ namespace Niculae_AnaMaria_Lab2.Migrations
                     OrderID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerID = table.Column<int>(type: "int", nullable: false),
-                    BookID = table.Column<int>(type: "int", nullable: false)
+                    BookID = table.Column<int>(type: "int", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

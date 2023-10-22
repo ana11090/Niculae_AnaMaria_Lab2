@@ -22,5 +22,7 @@ namespace Niculae_AnaMaria_Lab2.Models
         public int AuthorID { get; set; } 
 
         public Author Author { get; set; }
+
+        public ICollection<Order> Orders { get; set; }
     }
 }

@@ -12,7 +12,7 @@ using Niculae_AnaMaria_Lab2.Data;
 namespace Niculae_AnaMaria_Lab2.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20231020162906_InitialCreate")]
+    [Migration("20231022115759_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -109,6 +109,9 @@ namespace Niculae_AnaMaria_Lab2.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("OrderID");
 
                     b.HasIndex("BookID");
@@ -132,7 +135,7 @@ namespace Niculae_AnaMaria_Lab2.Migrations
             modelBuilder.Entity("Niculae_AnaMaria_Lab2.Models.Order", b =>
                 {
                     b.HasOne("Niculae_AnaMaria_Lab2.Models.Book", "Book")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("BookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -151,6 +154,11 @@ namespace Niculae_AnaMaria_Lab2.Migrations
             modelBuilder.Entity("Niculae_AnaMaria_Lab2.Models.Author", b =>
                 {
                     b.Navigation("Books");
+                });
+
+            modelBuilder.Entity("Niculae_AnaMaria_Lab2.Models.Book", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Niculae_AnaMaria_Lab2.Models.Customer", b =>
