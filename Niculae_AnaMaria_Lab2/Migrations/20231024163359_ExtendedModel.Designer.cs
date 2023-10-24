@@ -12,7 +12,7 @@ using Niculae_AnaMaria_Lab2.Data;
 namespace Niculae_AnaMaria_Lab2.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20231023161536_ExtendedModel")]
+    [Migration("20231024163359_ExtendedModel")]
     partial class ExtendedModel
     {
         /// <inheritdoc />
