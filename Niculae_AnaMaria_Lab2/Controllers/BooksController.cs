@@ -64,6 +64,7 @@ namespace Niculae_AnaMaria_Lab2.Controllers
         string searchString,
         int? pageNumber)
         {
+
             ViewData["CurrentSort"] = sortOrder;
             ViewData["TitleSortParm"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
@@ -137,7 +138,7 @@ namespace Niculae_AnaMaria_Lab2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Author,Price")] Book book)
+        public async Task<IActionResult> Create([Bind("Title,FullName,Price")] Book book)
         {
             try
             {
