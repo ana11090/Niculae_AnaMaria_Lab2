@@ -49,7 +49,7 @@
         }
     </tbody>
 </table>
-
+@* 
 @if (Model.Books != null)
 {
     <h3>Books Published by Selected Publisher</h3>
@@ -81,6 +81,46 @@
                     @item.Price
                 </td>
             </tr>
+        }
+    </table>
+}
+ *@
+
+@if (Model.Books != null)
+{
+    <h3>Clients who Ordered Books Published by Selected Publisher</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Client Name</th>
+            <th>Client Address</th>
+            <th>Order Date</th>
+        </tr>
+        @foreach (var book in Model.Books)
+        {
+            string selectedRow = "";
+            if (book.ID == (int?)ViewData["BookID"])
+            {
+                selectedRow = "success";
+            }
+
+            foreach (var order in book.Orders)
+            {
+                <tr class="@selectedRow">
+                    <td>
+                        @Html.ActionLink("Select", "Index", new { bookID = book.ID })
+                    </td>
+                    <td>
+                        @order.Customer.Name
+                    </td>
+                    <td>
+                        @order.Customer.Adress
+                    </td>
+                    <td>
+                        @order.OrderDate
+                    </td>
+                </tr>
+            }
         }
     </table>
 }
